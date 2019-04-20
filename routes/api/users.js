@@ -16,9 +16,9 @@ const User = require("../../models/User");
  * @acess public
  * @type {[type]}
  */
-// router.get("/test", (req, res) => {
-//     res.json({msg:"login works"});
-// });
+router.get("/test", (req, res) => {
+    res.json({msg:"login works"});
+});
 
 /**
 * $route POST api/users/register
@@ -36,12 +36,11 @@ router.post("/register", (req, res) => {
                 const avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: 'mm'});
                 const newUser = new User({
                     name: req.body.name,
+                    password: req.body.password,
                     email: req.body.email,
                     avatar,
-                    password: req.body.password,
                     identity: req.body.identity
                 });
-
                 bcrypt.genSalt(10, function(err, salt){
                     // console.log(newUser);
                     // 后端逻辑可能存在的问题：password为空
@@ -77,7 +76,7 @@ router.post("/login",(req, res) => {
             bcrypt.compare(password, user.password)
                   .then(isMatch => {
                       if (isMatch) {
-                          // 若成功：返回token
+                          // 生成token，若成功：返回token
                           const rule = {
                               id: user.id,
                               name: user.name,
