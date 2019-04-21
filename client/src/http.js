@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Loading, Message } from "element-ui";
+import router from "./router";
 
 let loading;
 function startLoading() {
@@ -20,6 +21,10 @@ axios.interceptors.request.use(
   config => {
     // 开始加载动画
     startLoading();
+    if (localStorage.eleToken) {
+      // 设置统一的header
+      config.headers.Authorization = localStorage.eleToken;
+    }
     return config;
   },
   error => {
@@ -36,6 +41,16 @@ axios.interceptors.response.use(
   },
   error => {
     endLoading();
+
+    // 获取错误状态码
+    const { status } = error.response;
+    if (status == 401) {
+      Message.error("token已失效, 请重新登录");
+      // 清除token
+      localStorage.removeItem("eleToken");
+      // 跳转到登录页面
+      router.push("/login");
+    }
     Message.error(error.response.data);
     return Promise.reject(error);
   }

@@ -34,5 +34,26 @@ module.exports = {
     } else {
       // 生产开发配置
     }
+  },
+  parallel: require("os").cpus().length > 1, // 构建时开启多进程处理babel编译
+  pluginOptions: {},
+  pwa: {},
+  devServer: {
+    open: true,
+    host: "localhost",
+    port: 8080,
+    https: false,
+    proxy: {
+      // 配置跨域
+      "/api": {
+        target: "http://localhost:5000/api",
+        ws: true,
+        changOrigin: true,
+        pathRewrite: {
+          "^/api": ""
+        }
+      }
+    },
+    before: app => {}
   }
 };
