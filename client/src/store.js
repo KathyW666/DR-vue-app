@@ -26,7 +26,7 @@ const mutations = {
       state.isAuthenticated = false;
     }
   },
-  [type.SET_USER](state, user) {
+  [types.SET_USER](state, user) {
     if (user) {
       state.user = user;
     } else {
@@ -36,17 +36,22 @@ const mutations = {
 };
 
 const actions = {
+  // 异步操作actions
   setAuthenticated: ({ commit }, isAuthenticated) => {
-    commit(type.SET_AUTHENTICATED, isAuthenticated);
+    commit(types.SET_AUTHENTICATED, isAuthenticated);
   },
   setUser: ({ commit }, user) => {
-    commit(type.SET_USER, user);
+    commit(types.SET_USER, user);
+  },
+  clearCurrentState: ({ commit }) => {
+    commit(types.SET_AUTHENTICATED, false);
+    commit(types.SET_USER, null);
   }
 };
 
 export default new Vuex.Store({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {}
+  state,
+  getters,
+  mutations,
+  actions
 });

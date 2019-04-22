@@ -1,12 +1,24 @@
 <template>
-    <div class="index">
-        初始化页面
-    </div>
+  <div class="index">
+    <HeadNav></HeadNav>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "index",
-        components: {}
-    };
+import HeadNav from "../components/HeadNav.vue";
+export default {
+  name: "index",
+  components: {
+    HeadNav
+  }
+};
 </script>
+
+<style media="screen">
+.index {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+</style>

@@ -30,7 +30,7 @@
               type="primary"
               class="submit_bt"
               @click="submitForm('loginForm')"
-              >登录</el-button
+              >登 录</el-button
             >
           </el-form-item>
           <div class="tiparea">
@@ -46,9 +46,9 @@
 
 <script>
 import jwt_decode from "jwt-decode";
+
 export default {
   name: "login",
-  components: {},
   data() {
     return {
       loginUser: {
@@ -85,7 +85,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$axios.post("/api/users/login", this.loginUser).then(res => {
-            console.log(res);
+            // console.log(res);
             // 成功登录，需要拿到token
             const { token } = res.data;
 
@@ -94,11 +94,26 @@ export default {
 
             // 解析token
             const decoded = jwt_decode(token);
-            console.log(decoded);
+            // console.log(decoded);
+
+            // token存储到vuex中
+            this.$store.dispatch("setAuthenticated", !this.isEmpty(decoded));
+            this.$store.dispatch("setUser", decoded);
+
+            // 页面跳转
+            this.$router.push("/index");
           });
-          this.$router.push("/index");
         }
       });
+    },
+    isEmpty(value) {
+      // 判断是否是falsy的
+      return (
+        value === undefined ||
+        value === null ||
+        (typeof value === "object" && Object.keys(value).length === 0) ||
+        (typeof value === "string" && value.trim().length === 0)
+      );
     }
   }
 };
