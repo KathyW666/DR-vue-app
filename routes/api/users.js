@@ -86,13 +86,18 @@ router.post("/login", (req, res) => {
           avatar: user.avatar,
           identity: user.identity
         };
-        jwt.sign(rule, keys.secretOrKey, { expiresIn: 10 }, (err, token) => {
-          if (err) throw err;
-          res.json({
-            success: true,
-            token: "Bearer " + token
-          });
-        });
+        jwt.sign(
+          rule,
+          keys.secretOrKey,
+          { expiresIn: 3600 * 3 },
+          (err, token) => {
+            if (err) throw err;
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
       } else {
         return res.status(400).json("密码错误!");
       }

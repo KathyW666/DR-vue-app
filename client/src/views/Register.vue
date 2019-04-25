@@ -55,6 +55,9 @@
               >提交</el-button
             >
           </el-form-item>
+          <div class="tiparea">
+            <p>已有账号？现在<router-link to="/login">登录</router-link></p>
+          </div>
         </el-form>
       </div>
     </section>
@@ -194,5 +197,15 @@ export default {
 
 .submit_bt {
   width: 100%;
+}
+
+.tiparea {
+  text-align: right;
+  font-size: 12px;
+  color: #333;
+}
+
+.tiparea p a {
+  color: #409eff;
 }
 </style>

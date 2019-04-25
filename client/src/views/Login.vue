@@ -161,7 +161,7 @@ export default {
 
 .tiparea {
   text-align: right;
-  font-style: 12px;
+  font-size: 12px;
   color: #333;
 }
 

@@ -12,19 +12,20 @@
   width: 100%;
   height: 100%;
   background: url(../assets/profile-bg.jpg) no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .container {
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   padding-top: 100px;
-  background-color: rgba(0, 0, 0, 0.7);
   text-align: center;
   color: white;
 }
 .title {
   font-size: 30px;
+  font-weight: bold;
 }
 .lead {
   margin-top: 50px;
